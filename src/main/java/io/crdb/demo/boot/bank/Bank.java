@@ -1,4 +1,4 @@
-package io.crdb.demo.boot.bank.v1;
+package io.crdb.demo.boot.bank;
 
 public class Bank {
 
