@@ -8,6 +8,8 @@ kubectl get services
 
 minikube service bootdemo
 
+kubectl delete pod <pod name>
+
 kubectl delete deployment bootdemo
 
 kubectl delete service bootdemo
