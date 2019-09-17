@@ -4,6 +4,8 @@ import io.crdb.demo.boot.bank.Bank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +17,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController("BankControllerV1")
+@Controller("BankControllerV1")
 public class BankController {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -27,7 +29,7 @@ public class BankController {
     }
 
     @GetMapping("/v1/banks")
-    public List<Bank> getBanks() {
+    public String getBanks(Model model) {
 
         List<Bank> banks = new ArrayList<>();
 
@@ -44,9 +46,11 @@ public class BankController {
                 banks.add(bank);
             }
         } catch (SQLException e) {
-            log.error("error getting /banks", e);
+            log.error("error getting /v1/banks", e);
         }
 
-        return banks;
+        model.addAttribute("banks", banks);
+
+        return "banks";
     }
 }

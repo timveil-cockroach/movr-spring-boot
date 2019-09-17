@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{default.html :: layout(~{::title}, ~{::#banks},  ~{::script})}">
+
+
+<title>Banks</title>
+
+<div id="banks">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Balance</th>
+            <th>Payload</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bank : ${banks}">
+            <td th:text="${bank.id}"></td>
+            <td th:text="${bank.balance}"></td>
+            <td th:text="${bank.payload}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+</script>
+
+
+</html>
