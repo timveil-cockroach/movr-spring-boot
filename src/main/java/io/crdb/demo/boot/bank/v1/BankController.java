@@ -37,9 +37,9 @@ public class BankController {
 
             while (resultSet.next()) {
                 Bank bank = new Bank();
-                bank.setId(resultSet.getLong(0));
-                bank.setBalance(resultSet.getLong(1));
-                bank.setPayload(resultSet.getString(2));
+                bank.setId(resultSet.getLong(1));
+                bank.setBalance(resultSet.getLong(2));
+                bank.setPayload(resultSet.getString(3));
 
                 banks.add(bank);
             }
