@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{default.html :: layout(~{::title}, ~{::#promocodes},  ~{::script})}">
+
+
+<title>Promo Codes</title>
+
+<div id="promocodes">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Code</th>
+            <th>Description</th>
+            <th>Creation Time</th>
+            <th>Expiration Time</th>
+            <th>Rules</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="promoCode : ${promoCodes}">
+            <td th:text="${promoCode.code}"></td>
+            <td th:text="${promoCode.description}"></td>
+            <td th:text="${promoCode.creationTime}"></td>
+            <td th:text="${promoCode.expirationTime}"></td>
+            <td th:text="${promoCode.rules}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+</script>
+
+
+</html>

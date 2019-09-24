@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -28,7 +27,7 @@ public class BankController {
         this.cockroach = cockroach;
     }
 
-    @GetMapping("/v1/banks")
+    @GetMapping("/bank/v1/banks")
     public String getBanks(Model model) {
 
         List<Bank> banks = new ArrayList<>();
@@ -46,7 +45,7 @@ public class BankController {
                 banks.add(bank);
             }
         } catch (SQLException e) {
-            log.error("error getting /v1/banks", e);
+            log.error("error getting /bank/v1/banks", e);
         }
 
         model.addAttribute("banks", banks);

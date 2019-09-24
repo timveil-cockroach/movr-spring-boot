@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class BankController {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @GetMapping("/v2/banks")
+    @GetMapping("/bank/v2/banks")
     public String getBanks(Model model) {
 
         List<Bank> banks = jdbcTemplate.query("select * from bank limit 25", (resultSet, i) -> {
