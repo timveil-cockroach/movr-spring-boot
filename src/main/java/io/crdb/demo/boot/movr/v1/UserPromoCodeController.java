@@ -1,6 +1,6 @@
 package io.crdb.demo.boot.movr.v1;
 
-import io.crdb.demo.boot.movr.PromoCode;
+import io.crdb.demo.boot.movr.UserPromoCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller("UserPromoCodeControllerV1")
 public class UserPromoCodeController {
@@ -29,30 +30,29 @@ public class UserPromoCodeController {
     }
 
     @GetMapping("/movr/v1/userPromoCodes")
-    public String getPromoCodes(Model model) {
+    public String getUserPromoCodes(Model model) {
 
-        List<PromoCode> promoCodes = new ArrayList<>();
+        List<UserPromoCode> promoCodes = new ArrayList<>();
 
         try (Connection connection = cockroach.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("select * from promo_codes limit 25")) {
+             ResultSet resultSet = statement.executeQuery("select * from user_promo_codes limit 25")) {
 
             while (resultSet.next()) {
-                PromoCode promoCode = new PromoCode();
-                promoCode.setCode(resultSet.getString(1));
-                promoCode.setDescription(resultSet.getString(2));
-                promoCode.setCreationTime(resultSet.getDate(3));
-                promoCode.setExpirationTime(resultSet.getDate(4));
-                promoCode.setRules(resultSet.getString(5));
-
-                promoCodes.add(promoCode);
+                UserPromoCode userPromoCodes = new UserPromoCode();
+                userPromoCodes.setCity(resultSet.getString(1));
+                userPromoCodes.setUserId(UUID.fromString(resultSet.getString(2)));
+                userPromoCodes.setCode(resultSet.getString(3));
+                userPromoCodes.setTimestamp(resultSet.getDate(4));
+                userPromoCodes.setUsageCount(resultSet.getInt(5));
+                promoCodes.add(userPromoCodes);
             }
         } catch (SQLException e) {
             log.error("error getting /movr/v1/userPromoCodes", e);
         }
 
-        model.addAttribute("promoCodes", promoCodes);
+        model.addAttribute("userPromoCodes", promoCodes);
 
-        return "promo-codes";
+        return "user-promo-codes";
     }
 }

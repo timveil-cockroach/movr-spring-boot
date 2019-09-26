@@ -3,6 +3,15 @@ package io.crdb.demo.boot.movr;
 import java.util.Date;
 import java.util.UUID;
 
+/*
+CREATE TABLE user_promo_codes (
+	city VARCHAR NOT NULL,
+	user_id UUID NOT NULL,
+	code VARCHAR NOT NULL,
+	"timestamp" TIMESTAMP NULL,
+	usage_count INT8 NULL
+)
+ */
 public class UserPromoCode {
     private String city;
     private UUID userId;

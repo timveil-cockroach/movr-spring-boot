@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{default.html :: layout(~{::title}, ~{::#userPromoCodes},  ~{::script})}">
+
+
+<title>User Promo Codes</title>
+
+<div id="userPromoCodes">
+    <h2>User Promo Codes</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>City</th>
+            <th>User ID</th>
+            <th>Code</th>
+            <th>Timestamp</th>
+            <th>Usage Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="upc : ${userPromoCodes}">
+            <td th:text="${upc.city}"></td>
+            <td th:text="${upc.userId}"></td>
+            <td th:text="${upc.code}"></td>
+            <td th:text="${upc.timestamp}"></td>
+            <td th:text="${upc.usageCount}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+</script>
+
+
+</html>
