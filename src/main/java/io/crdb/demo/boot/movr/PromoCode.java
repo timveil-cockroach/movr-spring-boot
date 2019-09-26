@@ -1,7 +1,15 @@
 package io.crdb.demo.boot.movr;
 
 import java.util.Date;
-
+/*
+CREATE TABLE promo_codes (
+	code VARCHAR NOT NULL,
+	description VARCHAR NULL,
+	creation_time TIMESTAMP NULL,
+	expiration_time TIMESTAMP NULL,
+	rules JSONB NULL
+)
+ */
 public class PromoCode {
     private String code;
     private String description;
