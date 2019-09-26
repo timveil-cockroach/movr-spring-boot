@@ -2,6 +2,15 @@ package io.crdb.demo.boot.movr;
 
 import java.util.UUID;
 
+/*
+CREATE TABLE users (
+	id UUID NOT NULL,
+	city VARCHAR NOT NULL,
+	name VARCHAR NULL,
+	address VARCHAR NULL,
+	credit_card VARCHAR NULL
+)
+ */
 public class User {
 
     private UUID id;

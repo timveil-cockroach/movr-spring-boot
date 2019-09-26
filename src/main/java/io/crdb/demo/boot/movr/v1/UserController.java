@@ -1,6 +1,6 @@
 package io.crdb.demo.boot.movr.v1;
 
-import io.crdb.demo.boot.movr.PromoCode;
+import io.crdb.demo.boot.movr.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller("UserControllerV1")
 public class UserController {
@@ -29,30 +30,30 @@ public class UserController {
     }
 
     @GetMapping("/movr/v1/users")
-    public String getPromoCodes(Model model) {
+    public String getUsers(Model model) {
 
-        List<PromoCode> promoCodes = new ArrayList<>();
+        List<User> users = new ArrayList<>();
 
         try (Connection connection = cockroach.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("select * from promo_codes limit 25")) {
+             ResultSet resultSet = statement.executeQuery("select * from users limit 25")) {
 
             while (resultSet.next()) {
-                PromoCode promoCode = new PromoCode();
-                promoCode.setCode(resultSet.getString(1));
-                promoCode.setDescription(resultSet.getString(2));
-                promoCode.setCreationTime(resultSet.getDate(3));
-                promoCode.setExpirationTime(resultSet.getDate(4));
-                promoCode.setRules(resultSet.getString(5));
+                User user = new User();
+                user.setId(UUID.fromString(resultSet.getString(1)));
+                user.setCity(resultSet.getString(2));
+                user.setName(resultSet.getString(3));
+                user.setAddress(resultSet.getString(4));
+                user.setCreditCard(resultSet.getString(5));
 
-                promoCodes.add(promoCode);
+                users.add(user);
             }
         } catch (SQLException e) {
             log.error("error getting /movr/v1/users", e);
         }
 
-        model.addAttribute("promoCodes", promoCodes);
+        model.addAttribute("users", users);
 
-        return "promo-codes";
+        return "users";
     }
 }
