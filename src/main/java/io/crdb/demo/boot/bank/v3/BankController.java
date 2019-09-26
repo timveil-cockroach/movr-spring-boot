@@ -9,8 +9,6 @@ public class BankController {
 
     @GetMapping("/bank/v3/banks")
     public String getBanks(Model model) {
-
         return "banks";
-
     }
 }

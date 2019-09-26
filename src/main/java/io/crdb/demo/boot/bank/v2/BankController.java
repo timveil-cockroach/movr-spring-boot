@@ -33,6 +33,5 @@ public class BankController {
         model.addAttribute("banks", banks);
 
         return "banks";
-
     }
 }
