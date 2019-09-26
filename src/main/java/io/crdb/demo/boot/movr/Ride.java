@@ -3,6 +3,21 @@ package io.crdb.demo.boot.movr;
 import java.util.Date;
 import java.util.UUID;
 
+/*
+CREATE TABLE rides (
+	id UUID NOT NULL,
+	city VARCHAR NOT NULL,
+	vehicle_city VARCHAR NULL,
+	rider_id UUID NULL,
+	vehicle_id UUID NULL,
+	start_address VARCHAR NULL,
+	end_address VARCHAR NULL,
+	start_time TIMESTAMP NULL,
+	end_time TIMESTAMP NULL,
+	revenue DECIMAL(10,2) NULL
+)
+ */
+
 public class Ride {
     private UUID id;
     private String city;

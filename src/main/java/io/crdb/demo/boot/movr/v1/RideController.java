@@ -1,6 +1,6 @@
 package io.crdb.demo.boot.movr.v1;
 
-import io.crdb.demo.boot.movr.PromoCode;
+import io.crdb.demo.boot.movr.Ride;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller("RideControllerV1")
 public class RideController {
@@ -29,30 +30,34 @@ public class RideController {
     }
 
     @GetMapping("/movr/v1/rides")
-    public String getPromoCodes(Model model) {
+    public String getRides(Model model) {
 
-        List<PromoCode> promoCodes = new ArrayList<>();
+        List<Ride> rides = new ArrayList<>();
 
         try (Connection connection = cockroach.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("select * from promo_codes limit 25")) {
+             ResultSet resultSet = statement.executeQuery("select * from rides limit 25")) {
 
             while (resultSet.next()) {
-                PromoCode promoCode = new PromoCode();
-                promoCode.setCode(resultSet.getString(1));
-                promoCode.setDescription(resultSet.getString(2));
-                promoCode.setCreationTime(resultSet.getDate(3));
-                promoCode.setExpirationTime(resultSet.getDate(4));
-                promoCode.setRules(resultSet.getString(5));
-
-                promoCodes.add(promoCode);
+                Ride ride = new Ride();
+                ride.setId(UUID.fromString(resultSet.getString(1)));
+                ride.setCity(resultSet.getString(2));
+                ride.setVehicleCity(resultSet.getString(3));
+                ride.setRiderId(UUID.fromString(resultSet.getString(4)));
+                ride.setVehicleId(UUID.fromString(resultSet.getString(5)));
+                ride.setStartAddress(resultSet.getString(6));
+                ride.setEndAddress(resultSet.getString(7));
+                ride.setStartTime(resultSet.getDate(8));
+                ride.setEndTime(resultSet.getDate(9));
+                ride.setRevenue(resultSet.getDouble(10));
+                rides.add(ride);
             }
         } catch (SQLException e) {
             log.error("error getting /movr/v1/rides", e);
         }
 
-        model.addAttribute("promoCodes", promoCodes);
+        model.addAttribute("rides", rides);
 
-        return "promo-codes";
+        return "rides";
     }
 }
