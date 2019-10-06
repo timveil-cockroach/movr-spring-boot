@@ -3,13 +3,22 @@ package io.crdb.demo.boot.movr;
 import java.util.Date;
 import java.util.UUID;
 
+/*
+CREATE TABLE vehicle_location_histories (
+	city VARCHAR NOT NULL,
+	ride_id UUID NOT NULL,
+	"timestamp" TIMESTAMP NOT NULL,
+	lat FLOAT8 NULL,
+	long FLOAT8 NULL
+)
+ */
 public class VehicleLocationHistory {
 
     private String city;
     private UUID rideId;
     private Date timestamp;
     private Float latitude;
-    private Float longitutde;
+    private Float longitude;
 
     public String getCity() {
         return city;
@@ -43,11 +52,11 @@ public class VehicleLocationHistory {
         this.latitude = latitude;
     }
 
-    public Float getLongitutde() {
-        return longitutde;
+    public Float getLongitude() {
+        return longitude;
     }
 
-    public void setLongitutde(Float longitutde) {
-        this.longitutde = longitutde;
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
     }
 }
