@@ -1,6 +1,7 @@
 package io.crdb.demo.boot.movr.v1;
 
 import io.crdb.demo.boot.movr.PromoCode;
+import io.crdb.demo.boot.movr.Vehicle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller("VehicleControllerV1")
 public class VehicleController {
@@ -31,28 +33,31 @@ public class VehicleController {
     @GetMapping("/movr/v1/vehicles")
     public String getPromoCodes(Model model) {
 
-        List<PromoCode> promoCodes = new ArrayList<>();
+        List<Vehicle> vehicles = new ArrayList<>();
 
         try (Connection connection = cockroach.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("select * from promo_codes limit 25")) {
+             ResultSet resultSet = statement.executeQuery("select * from vehicles limit 25")) {
 
             while (resultSet.next()) {
-                PromoCode promoCode = new PromoCode();
-                promoCode.setCode(resultSet.getString(1));
-                promoCode.setDescription(resultSet.getString(2));
-                promoCode.setCreationTime(resultSet.getDate(3));
-                promoCode.setExpirationTime(resultSet.getDate(4));
-                promoCode.setRules(resultSet.getString(5));
+                Vehicle vehicle = new Vehicle();
+                vehicle.setId(UUID.fromString(resultSet.getString(1)));
+                vehicle.setCity(resultSet.getString(2));
+                vehicle.setType(resultSet.getString(3));
+                vehicle.setOwnerId(UUID.fromString(resultSet.getString(4)));
+                vehicle.setCreationDate(resultSet.getDate(5));
+                vehicle.setStatus(resultSet.getString(6));
+                vehicle.setCurrentLocation(resultSet.getString(7));
+                vehicle.setExt(resultSet.getString(8));
 
-                promoCodes.add(promoCode);
+                vehicles.add(vehicle);
             }
         } catch (SQLException e) {
             log.error("error getting /movr/v1/vehicles", e);
         }
 
-        model.addAttribute("promoCodes", promoCodes);
+        model.addAttribute("vehicles", vehicles);
 
-        return "promo-codes";
+        return "vehicles";
     }
 }

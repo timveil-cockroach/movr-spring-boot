@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{default.html :: layout(~{::title}, ~{::#vehicles},  ~{::script})}">
+
+
+<title>Vehicles</title>
+
+<div id="vehicles">
+    <h2>Vehicles</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>City</th>
+            <th>Type</th>
+            <th>Owner ID</th>
+            <th>Creation Time</th>
+            <th>Status</th>
+            <th>Current Location</th>
+            <th>Ext</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="vehicle : ${vehicles}">
+            <td th:text="${vehicle.id}"></td>
+            <td th:text="${vehicle.city}"></td>
+            <td th:text="${vehicle.type}"></td>
+            <td th:text="${vehicle.ownerId}"></td>
+            <td th:text="${vehicle.creationDate}"></td>
+            <td th:text="${vehicle.status}"></td>
+            <td th:text="${vehicle.currentLocation}"></td>
+            <td th:text="${vehicle.ext}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+</script>
+
+
+</html>
