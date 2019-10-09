@@ -1,6 +1,5 @@
 package io.crdb.demo.boot.movr.v1;
 
-import io.crdb.demo.boot.movr.PromoCode;
 import io.crdb.demo.boot.movr.Vehicle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +30,7 @@ public class VehicleController {
     }
 
     @GetMapping("/movr/v1/vehicles")
-    public String getPromoCodes(Model model) {
+    public String getVehicles(Model model) {
 
         List<Vehicle> vehicles = new ArrayList<>();
 

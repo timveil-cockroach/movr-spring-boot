@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{default.html :: layout(~{::title}, ~{::#locations},  ~{::script})}">
+
+
+<title>Vehicle Location History</title>
+
+<div id="locations">
+    <h2>Vehicle Location History</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>City</th>
+            <th>Ride ID</th>
+            <th>Timestamp</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="location : ${locations}">
+            <td th:text="${location.city}"></td>
+            <td th:text="${location.rideId}"></td>
+            <td th:text="${location.timestamp}"></td>
+            <td th:text="${location.latitude}"></td>
+            <td th:text="${location.longitude}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+</script>
+
+
+</html>

@@ -1,6 +1,7 @@
 package io.crdb.demo.boot.movr.v1;
 
 import io.crdb.demo.boot.movr.PromoCode;
+import io.crdb.demo.boot.movr.VehicleLocationHistory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller("VehicleLocationControllerV1")
 public class VehicleLocationController {
@@ -29,30 +31,30 @@ public class VehicleLocationController {
     }
 
     @GetMapping("/movr/v1/vehicleLocations")
-    public String getPromoCodes(Model model) {
+    public String getVehicleLocationHistory(Model model) {
 
-        List<PromoCode> promoCodes = new ArrayList<>();
+        List<VehicleLocationHistory> locations = new ArrayList<>();
 
         try (Connection connection = cockroach.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("select * from promo_codes limit 25")) {
+             ResultSet resultSet = statement.executeQuery("select * from vehicle_location_histories limit 25")) {
 
             while (resultSet.next()) {
-                PromoCode promoCode = new PromoCode();
-                promoCode.setCode(resultSet.getString(1));
-                promoCode.setDescription(resultSet.getString(2));
-                promoCode.setCreationTime(resultSet.getDate(3));
-                promoCode.setExpirationTime(resultSet.getDate(4));
-                promoCode.setRules(resultSet.getString(5));
+                VehicleLocationHistory history = new VehicleLocationHistory();
+                history.setCity(resultSet.getString(1));
+                history.setRideId(UUID.fromString(resultSet.getString(2)));
+                history.setTimestamp(resultSet.getDate(3));
+                history.setLatitude(resultSet.getFloat(4));
+                history.setLongitude(resultSet.getFloat(5));
 
-                promoCodes.add(promoCode);
+                locations.add(history);
             }
         } catch (SQLException e) {
             log.error("error getting /movr/v1/vehicleLocations", e);
         }
 
-        model.addAttribute("promoCodes", promoCodes);
+        model.addAttribute("locations", locations);
 
-        return "promo-codes";
+        return "locations";
     }
 }
