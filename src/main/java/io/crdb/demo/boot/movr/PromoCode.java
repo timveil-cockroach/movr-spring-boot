@@ -1,5 +1,8 @@
 package io.crdb.demo.boot.movr;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 /*
 CREATE TABLE promo_codes (
@@ -10,7 +13,10 @@ CREATE TABLE promo_codes (
 	rules JSONB NULL
 )
  */
+@Entity
+@Table(name = "promo_codes")
 public class PromoCode {
+    @Id
     private String code;
     private String description;
     private Date creationTime;
