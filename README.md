@@ -1,7 +1,7 @@
 ## Start a Single Node CRDB Instance for Testing
 
 start cluster
-docker run -d --name=crdb --hostname=crdb -p 26257:26257 -p 8080:8080  cockroachdb/cockroach-unstable:v19.2.0-rc.4 start-single-node --insecure
+docker run -d --name=crdb --hostname=crdb -p 26257:26257 -p 8080:8080  cockroachdb/cockroach:latest start-single-node --insecure
 
 init movr
 docker exec -it crdb ./cockroach workload init movr 'postgresql://root@crdb:26257?sslmode=disable'
@@ -11,6 +11,8 @@ docker exec -it crdb ./cockroach workload run movr --duration=5m 'postgresql://r
 
 run application
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local
+
+docker stop crdb && docker rm crdb
 
 -------------------------
 
