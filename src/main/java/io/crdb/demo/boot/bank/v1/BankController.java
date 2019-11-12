@@ -16,6 +16,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this example uses the DataSource directly
+ */
 @Controller("BankControllerV1")
 public class BankController {
     private final Logger log = LoggerFactory.getLogger(getClass());
