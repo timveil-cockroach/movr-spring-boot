@@ -1,5 +1,9 @@
 package io.crdb.demo.boot.movr;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,12 +19,17 @@ CREATE TABLE vehicles (
 	ext JSONB NULL
 )
  */
+@Entity
+@Table(name = "vehicles")
 public class Vehicle {
 
+    @Id
     private UUID id;
     private String city;
     private String type;
     private UUID ownerId;
+
+    @Column(name = "creation_time")
     private Date creationDate;
     private String status;
     private String currentLocation;
