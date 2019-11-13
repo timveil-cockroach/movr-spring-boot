@@ -1,5 +1,8 @@
 package io.crdb.demo.boot.movr;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.UUID;
 
@@ -18,7 +21,10 @@ CREATE TABLE rides (
 )
  */
 
+@Entity
+@Table(name = "rides")
 public class Ride {
+    @Id
     private UUID id;
     private String city;
     private String vehicleCity;

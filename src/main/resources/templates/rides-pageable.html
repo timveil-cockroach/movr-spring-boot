@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{default.html :: layout(~{::title}, ~{::#rides}, ~{::script})}">
+
+
+<title>Rides</title>
+
+<div id="rides">
+    <h2>Rides</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>City</th>
+            <th>Vehicle City</th>
+            <th>Rider ID</th>
+            <th>Vehicle ID</th>
+            <th>Start Address</th>
+            <th>End Address</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ride :  ${page.content}">
+            <td th:text="${ride.id}"></td>
+            <td th:text="${ride.city}"></td>
+            <td th:text="${ride.vehicleCity}"></td>
+            <td th:text="${ride.riderId}"></td>
+            <td th:text="${ride.vehicleId}"></td>
+            <td th:text="${ride.startAddress}"></td>
+            <td th:text="${ride.endAddress}"></td>
+            <td th:text="${ride.startTime}"></td>
+            <td th:text="${ride.endTime}"></td>
+            <td th:text="${ride.revenue}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="Pagination" th:if="${page.totalPages gt 0}">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${page.number eq 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/movr/v2/rides?page={id}(id=${page.number lt 2 ? 1 : page.number})}" aria-label="Previous" title="Previous Page">
+                    <span aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item" th:classappend="${i eq page.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( page.number + 1, page.totalPages > 10 + page.number ? page.number + 10 : page.totalPages, 1)}">
+                <a class="page-link" th:href="@{/movr/v2/rides?page={id}(id=${i})}" th:text="${i}" th:title="${'Page '+ i}"></a>
+            </li>
+            <li class="page-item disabled" th:if="${page.number + 10 < page.totalPages}">
+                <a class="page-link" href="#"><i class="fas fa-ellipsis-h"></i></a>
+            </li>
+            <li class="page-item" th:classappend="${page.number + 1 eq page.totalPages} ? 'disabled'">
+                <a class="page-link" th:href="@{/movr/v2/rides?page={id}(id=${page.number + 2})}" aria-label="Next" title="Next Page">
+                    <span aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+
+
+<script>
+
+</script>
+
+
+</html>
