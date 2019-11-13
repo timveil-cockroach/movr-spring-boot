@@ -15,33 +15,38 @@ This is an example, full stack, application using the following technologies:
 ### CockroachDB on Docker
 
 1) Start a single node CockroachDB instance
-    ```bash
-    docker run -d --name=crdb --hostname=crdb -p 26257:26257 -p 8080:8080 cockroachdb/cockroach:latest start-single-node --insecure
-    ```
+```bash
+docker run -d --name=crdb --hostname=crdb -p 26257:26257 -p 8080:8080 cockroachdb/cockroach:latest start-single-node --insecure
+```
+
 2) Create the `movr` database using CockroachDB's `workload` service
-    ```bash
-    docker exec -it crdb ./cockroach workload init movr 'postgresql://root@crdb:26257?sslmode=disable'
-    ```
+```bash
+docker exec -it crdb ./cockroach workload init movr 'postgresql://root@crdb:26257?sslmode=disable'
+```
+
 3) Run the `movr` workload generator to create data and simulate load
-    ```bash
-    docker exec -it crdb ./cockroach workload run movr --duration=5m 'postgresql://root@crdb:26257?sslmode=disable'
-    ```
+```bash
+docker exec -it crdb ./cockroach workload run movr --duration=5m 'postgresql://root@crdb:26257?sslmode=disable'
+```
+
 4) Start an instance of the `movr-spring-boot` application locally using Maven
-    ```bash
-    ./mvnw spring-boot:run -Dspring-boot.run.profiles=local
-    ```
-   or you can launch another Docker container containing the `movr-spring-boot` application
-   ```bash
-   docker run -d --name=movr-spring-boot --hostname=movr-spring-boot -p 8082:8082 cockroachdb/cockroach:latest start-single-node --insecure
-   ```
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local
+```
+
+or you can launch another Docker container containing the `movr-spring-boot` application
+```bash
+docker run -d --name=movr-spring-boot --hostname=movr-spring-boot -p 8082:8082 timveil/movr-spring-boot
+```
+
 5) Open the MOVR UI: http://localhost:8082/
 
 6) Open the CockroachDB UI:  http://localhost:8080/
 
 7) Shut down the `crdb` Docker image when ready
-    ```bash
-    docker stop crdb && docker rm crdb
-    ```
+```bash
+docker stop crdb && docker rm crdb
+```
 
 ### CockroachDB on Kubernetes
 todo
