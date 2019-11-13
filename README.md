@@ -9,6 +9,13 @@ docker exec -it crdb ./cockroach workload init movr 'postgresql://root@crdb:2625
 run movr
 docker exec -it crdb ./cockroach workload run movr --duration=5m 'postgresql://root@crdb:26257?sslmode=disable'
 
+init bank
+docker exec -it crdb ./cockroach workload init bank 'postgresql://root@crdb:26257?sslmode=disable'
+
+run bank
+docker exec -it crdb ./cockroach workload run bank --duration=5m 'postgresql://root@crdb:26257?sslmode=disable'
+
+
 run application
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local
 

@@ -1,7 +1,12 @@
 package io.crdb.demo.boot.bank;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Bank {
 
+    @Id
     private long id;
     private long balance;
     private String payload;
