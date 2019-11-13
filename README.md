@@ -35,9 +35,9 @@ This is an example, full stack, application using the following technologies:
 6) Open the CockroachDB UI:  http://localhost:8080/
 
 7) Shut down the `crdb` Docker image when ready
-```bash
-docker stop crdb && docker rm crdb
-```
+    ```bash
+    docker stop crdb && docker rm crdb
+    ```
 
 ### Kubernetes
 todo
