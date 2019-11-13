@@ -34,11 +34,6 @@ docker exec -it crdb ./cockroach workload run movr --duration=5m 'postgresql://r
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
-or you can launch another Docker container containing the `movr-spring-boot` application
-```bash
-docker run -d --name=movr-spring-boot --hostname=movr-spring-boot -p 8082:8082 timveil/movr-spring-boot
-```
-
 5) Open the MOVR UI: http://localhost:8082/
 
 6) Open the CockroachDB UI:  http://localhost:8080/
