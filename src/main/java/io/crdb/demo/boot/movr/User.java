@@ -1,5 +1,8 @@
 package io.crdb.demo.boot.movr;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 /*
@@ -11,8 +14,11 @@ CREATE TABLE users (
 	credit_card VARCHAR NULL
 )
  */
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
     private UUID id;
     private String city;
     private String name;
