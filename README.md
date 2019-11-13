@@ -12,7 +12,7 @@ This is an example, full stack, application using the following technologies:
 
 ## How to Run
 
-### Docker
+### CockroachDB on Docker
 
 1) Start a single node CockroachDB instance
     ```bash
@@ -26,10 +26,14 @@ This is an example, full stack, application using the following technologies:
     ```bash
     docker exec -it crdb ./cockroach workload run movr --duration=5m 'postgresql://root@crdb:26257?sslmode=disable'
     ```
-4) Start an instance of the `movr-spring-boot` application using Maven
+4) Start an instance of the `movr-spring-boot` application locally using Maven
     ```bash
     ./mvnw spring-boot:run -Dspring-boot.run.profiles=local
     ```
+   or you can launch another Docker container containing the `movr-spring-boot` application
+   ```bash
+   docker run -d --name=movr-spring-boot --hostname=movr-spring-boot -p 8082:8082 cockroachdb/cockroach:latest start-single-node --insecure
+   ```
 5) Open the MOVR UI: http://localhost:8082/
 
 6) Open the CockroachDB UI:  http://localhost:8080/
@@ -39,5 +43,5 @@ This is an example, full stack, application using the following technologies:
     docker stop crdb && docker rm crdb
     ```
 
-### Kubernetes
+### CockroachDB on Kubernetes
 todo

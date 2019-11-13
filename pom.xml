@@ -76,7 +76,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>timveil/crdb-springboot-demo</repository>
+                    <repository>timveil/movr-spring-boot</repository>
                     <tag>${project.version}</tag>
                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                     <buildArgs>
