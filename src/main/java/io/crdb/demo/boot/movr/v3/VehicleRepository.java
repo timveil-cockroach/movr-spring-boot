@@ -1,4 +1,4 @@
-package io.crdb.demo.boot.movr.v2;
+package io.crdb.demo.boot.movr.v3;
 
 import io.crdb.demo.boot.movr.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;

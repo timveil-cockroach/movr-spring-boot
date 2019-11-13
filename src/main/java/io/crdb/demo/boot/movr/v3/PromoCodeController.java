@@ -1,6 +1,6 @@
-package io.crdb.demo.boot.movr.v2;
+package io.crdb.demo.boot.movr.v3;
 
-import io.crdb.demo.boot.movr.User;
+import io.crdb.demo.boot.movr.PromoCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,23 +12,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller("UserControllerV2")
-public class UserController {
+@Controller("PromoCodeControllerV3")
+public class PromoCodeController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private UserRepository repository;
+    private PromoCodeRepository repository;
 
     @Autowired
-    public UserController(UserRepository repository) {
+    public PromoCodeController(PromoCodeRepository repository) {
         this.repository = repository;
     }
 
-    @GetMapping("/movr/v2/users")
-    public String getUsers(Model model, @PageableDefault(size = 10, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
-        Page<User> page = repository.findAll(pageable);
+    @GetMapping("/movr/v3/promoCodes")
+    public String getPromoCodes(Model model, @PageableDefault(size = 10, sort = "code", direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<PromoCode> page = repository.findAll(pageable);
         model.addAttribute("page", page);
-
-        return "users-pageable";
+        return "promo-codes-pageable";
     }
 }

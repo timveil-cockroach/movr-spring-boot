@@ -1,4 +1,4 @@
-package io.crdb.demo.boot.movr.v2;
+package io.crdb.demo.boot.movr.v3;
 
 import io.crdb.demo.boot.movr.Ride;
 import org.slf4j.Logger;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller("RideControllerV2")
+@Controller("RideControllerV3")
 public class RideController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -24,7 +24,7 @@ public class RideController {
         this.repository = repository;
     }
 
-    @GetMapping("/movr/v2/rides")
+    @GetMapping("/movr/v3/rides")
     public String getRides(Model model, @PageableDefault(size = 10, sort = "startTime", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Ride> page = repository.findAll(pageable);
         model.addAttribute("page", page);
