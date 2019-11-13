@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,7 @@ public class PromoCodeController {
     }
 
     @GetMapping("/movr/v2/promoCodes")
-    public String getPromoCodes(Model model, @PageableDefault(size = 10) Pageable pageable) {
+    public String getPromoCodes(Model model, @PageableDefault(size = 10, sort = "code", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<PromoCode> page = repository.findAll(pageable);
         model.addAttribute("page", page);
         return "promo-codes-pageable";
