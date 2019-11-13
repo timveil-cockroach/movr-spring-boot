@@ -1,11 +1,11 @@
 # MOVR Sample Application - Spring Boot
-> This project is in active development and likely not stable.  Proceed at your own risk
-
 This is an example, full stack, application using the following technologies:
 * Spring Boot
 * JPA for persistence
 * Thymeleaf for UI templating
 * Bootstrap for UI rendering
+
+> :warning: This project is in active development and likely not stable.  Proceed at your own risk. :warning:
 
 ## How to Build
 ```
