@@ -38,7 +38,7 @@ docker exec -it crdb ./cockroach workload run movr --duration=5m 'postgresql://r
 
 5) Open the MOVR UI: http://localhost:8082/
 
-6) Open the CockroachDB UI:  http://localhost:8080/
+6) Open the CockroachDB UI: http://localhost:8080/
 
 7) Shut down the `crdb` Docker image when ready
 ```bash
