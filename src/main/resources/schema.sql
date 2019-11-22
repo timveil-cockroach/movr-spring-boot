@@ -64,8 +64,8 @@ CREATE TABLE IF NOT EXISTS ride_locations (
 	ride_id UUID NOT NULL,
 	ride_city VARCHAR NOT NULL,
 	"timestamp" TIMESTAMP NOT NULL,
-	lat FLOAT8 NULL,
-	long FLOAT8 NULL,
+	latitude FLOAT8 NULL,
+	longitude FLOAT8 NULL,
 	CONSTRAINT "primary" PRIMARY KEY (ride_city ASC, ride_id ASC, "timestamp" ASC),
 	CONSTRAINT fk_rides FOREIGN KEY (ride_city, ride_id) REFERENCES rides(city, id)
 );

@@ -1,7 +1,6 @@
 package io.crdb.demo.boot.movr.v1;
 
-import io.crdb.demo.boot.movr.PromoCode;
-import io.crdb.demo.boot.movr.VehicleLocationHistory;
+import io.crdb.demo.boot.movr.RideLocations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +32,15 @@ public class VehicleLocationController {
     @GetMapping("/movr/v1/vehicleLocations")
     public String getVehicleLocationHistory(Model model) {
 
-        List<VehicleLocationHistory> locations = new ArrayList<>();
+        List<RideLocations> locations = new ArrayList<>();
 
         try (Connection connection = cockroach.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("select * from vehicle_location_histories limit 25")) {
+             ResultSet resultSet = statement.executeQuery("select * from ride_locations limit 25")) {
 
             while (resultSet.next()) {
-                VehicleLocationHistory history = new VehicleLocationHistory();
-                history.setCity(resultSet.getString(1));
+                RideLocations history = new RideLocations();
+                history.setRideCity(resultSet.getString(1));
                 history.setRideId(UUID.fromString(resultSet.getString(2)));
                 history.setTimestamp(resultSet.getDate(3));
                 history.setLatitude(resultSet.getFloat(4));

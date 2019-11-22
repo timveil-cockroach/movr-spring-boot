@@ -44,10 +44,8 @@ public class VehicleController {
                 vehicle.setCity(resultSet.getString(2));
                 vehicle.setType(resultSet.getString(3));
                 vehicle.setOwnerId(UUID.fromString(resultSet.getString(4)));
-                vehicle.setCreationDate(resultSet.getDate(5));
+                vehicle.setAddedToPool(resultSet.getDate(5));
                 vehicle.setStatus(resultSet.getString(6));
-                vehicle.setCurrentLocation(resultSet.getString(7));
-                vehicle.setExt(resultSet.getString(8));
 
                 vehicles.add(vehicle);
             }

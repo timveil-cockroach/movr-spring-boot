@@ -4,29 +4,20 @@ import java.util.Date;
 import java.util.UUID;
 
 /*
-CREATE TABLE vehicle_location_histories (
-	city VARCHAR NOT NULL,
+CREATE TABLE IF NOT EXISTS ride_locations (
 	ride_id UUID NOT NULL,
+	ride_city VARCHAR NOT NULL,
 	"timestamp" TIMESTAMP NOT NULL,
-	lat FLOAT8 NULL,
-	long FLOAT8 NULL
-)
+	latitude FLOAT8 NULL,
+	longitude FLOAT8 NULL,
  */
-public class VehicleLocationHistory {
+public class RideLocations {
 
-    private String city;
     private UUID rideId;
+    private String rideCity;
     private Date timestamp;
     private Float latitude;
     private Float longitude;
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
 
     public UUID getRideId() {
         return rideId;
@@ -34,6 +25,14 @@ public class VehicleLocationHistory {
 
     public void setRideId(UUID rideId) {
         this.rideId = rideId;
+    }
+
+    public String getRideCity() {
+        return rideCity;
+    }
+
+    public void setRideCity(String rideCity) {
+        this.rideCity = rideCity;
     }
 
     public Date getTimestamp() {

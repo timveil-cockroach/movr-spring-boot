@@ -8,16 +8,19 @@ import java.util.Date;
 import java.util.UUID;
 
 /*
-CREATE TABLE vehicles (
+CREATE TABLE IF NOT EXISTS vehicles (
 	id UUID NOT NULL,
 	city VARCHAR NOT NULL,
+    owner_id UUID NULL,
+	owner_city VARCHAR NOT NULL,
 	type VARCHAR NULL,
-	owner_id UUID NULL,
-	creation_time TIMESTAMP NULL,
+	added_to_pool TIMESTAMP NULL,
 	status VARCHAR NULL,
-	current_location VARCHAR NULL,
-	ext JSONB NULL
-)
+	make VARCHAR NULL,
+	color VARCHAR NULL,
+	CONSTRAINT "primary" PRIMARY KEY (city ASC, id ASC),
+	CONSTRAINT fk_users FOREIGN KEY (owner_city, owner_id) REFERENCES users(city, id)
+);
  */
 @Entity
 @Table(name = "vehicles")
@@ -26,14 +29,15 @@ public class Vehicle {
     @Id
     private UUID id;
     private String city;
-    private String type;
     private UUID ownerId;
+    private String ownerCity;
+    private String type;
 
-    @Column(name = "creation_time")
-    private Date creationDate;
+    @Column(name = "added_to_pool")
+    private Date addedToPool;
     private String status;
-    private String currentLocation;
-    private String ext;
+    private String make;
+    private String color;
 
     public UUID getId() {
         return id;
@@ -51,14 +55,6 @@ public class Vehicle {
         this.city = city;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public UUID getOwnerId() {
         return ownerId;
     }
@@ -67,12 +63,28 @@ public class Vehicle {
         this.ownerId = ownerId;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public String getOwnerCity() {
+        return ownerCity;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setOwnerCity(String ownerCity) {
+        this.ownerCity = ownerCity;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Date getAddedToPool() {
+        return addedToPool;
+    }
+
+    public void setAddedToPool(Date addedToPool) {
+        this.addedToPool = addedToPool;
     }
 
     public String getStatus() {
@@ -83,19 +95,19 @@ public class Vehicle {
         this.status = status;
     }
 
-    public String getCurrentLocation() {
-        return currentLocation;
+    public String getMake() {
+        return make;
     }
 
-    public void setCurrentLocation(String currentLocation) {
-        this.currentLocation = currentLocation;
+    public void setMake(String make) {
+        this.make = make;
     }
 
-    public String getExt() {
-        return ext;
+    public String getColor() {
+        return color;
     }
 
-    public void setExt(String ext) {
-        this.ext = ext;
+    public void setColor(String color) {
+        this.color = color;
     }
 }

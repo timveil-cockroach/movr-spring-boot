@@ -7,17 +7,18 @@ import java.util.Date;
 import java.util.UUID;
 
 /*
-CREATE TABLE rides (
+CREATE TABLE IF NOT EXISTS rides (
 	id UUID NOT NULL,
 	city VARCHAR NOT NULL,
-	vehicle_city VARCHAR NULL,
 	rider_id UUID NULL,
+	rider_city VARCHAR NOT NULL,
 	vehicle_id UUID NULL,
+	vehicle_city VARCHAR NULL,
 	start_address VARCHAR NULL,
 	end_address VARCHAR NULL,
 	start_time TIMESTAMP NULL,
 	end_time TIMESTAMP NULL,
-	revenue DECIMAL(10,2) NULL
+	revenue DECIMAL(10,2) NULL,
 )
  */
 
@@ -27,9 +28,10 @@ public class Ride {
     @Id
     private UUID id;
     private String city;
-    private String vehicleCity;
     private UUID riderId;
+    private String riderCity;
     private UUID vehicleId;
+    private String vehicleCity;
     private String startAddress;
     private String endAddress;
     private Date startTime;
@@ -52,14 +54,6 @@ public class Ride {
         this.city = city;
     }
 
-    public String getVehicleCity() {
-        return vehicleCity;
-    }
-
-    public void setVehicleCity(String vehicleCity) {
-        this.vehicleCity = vehicleCity;
-    }
-
     public UUID getRiderId() {
         return riderId;
     }
@@ -68,12 +62,28 @@ public class Ride {
         this.riderId = riderId;
     }
 
+    public String getRiderCity() {
+        return riderCity;
+    }
+
+    public void setRiderCity(String riderCity) {
+        this.riderCity = riderCity;
+    }
+
     public UUID getVehicleId() {
         return vehicleId;
     }
 
     public void setVehicleId(UUID vehicleId) {
         this.vehicleId = vehicleId;
+    }
+
+    public String getVehicleCity() {
+        return vehicleCity;
+    }
+
+    public void setVehicleCity(String vehicleCity) {
+        this.vehicleCity = vehicleCity;
     }
 
     public String getStartAddress() {
