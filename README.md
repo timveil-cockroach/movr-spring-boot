@@ -21,16 +21,6 @@ This is an example, full stack, application using the following technologies:
 docker run -d --name=crdb --hostname=crdb -p 26257:26257 -p 8080:8080 cockroachdb/cockroach:latest start-single-node --insecure
 ```
 
-2) Create the `movr` database using CockroachDB's `workload` service
-```bash
-docker exec -it crdb ./cockroach workload init movr 'postgresql://root@crdb:26257?sslmode=disable'
-```
-
-3) Run the `movr` workload generator to create data and simulate load
-```bash
-docker exec -it crdb ./cockroach workload run movr --duration=5m 'postgresql://root@crdb:26257?sslmode=disable'
-```
-
 4) Start an instance of the `movr-spring-boot` application locally using Maven
 ```bash
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local

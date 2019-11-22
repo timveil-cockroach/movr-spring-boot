@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS user_promo_codes CASCADE;
 DROP TABLE IF EXISTS rides CASCADE;
 DROP TABLE IF EXISTS vehicles CASCADE;
-DROP TABLE IF EXISTS vehicle_location_histories CASCADE;
+DROP TABLE IF EXISTS ride_locations CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
 	id UUID NOT NULL,
@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS users (
 	first_name VARCHAR NULL,
 	last_name VARCHAR NULL,
 	email_address VARCHAR NULL,
-	address VARCHAR NULL,
+	address_line_1 VARCHAR NULL,
+	address_line_2 VARCHAR NULL,
 	address_city VARCHAR NULL,
 	address_state VARCHAR NULL,
 	address_country VARCHAR NULL,
